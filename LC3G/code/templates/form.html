@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<title>LC3 Grader</title>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">LC3-Grader</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="sass.html">Sass</a></li>
+                    <li><a href="badges.html">Components</a></li>
+                    <li><a href="collapsible.html">JavaScript</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col s8">
+                    <blockquote>Upload an lc3 asm file.</blockquote>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <h2>Add a list of chars to add to the buffer of the lc3</h2>
+            </div> -->
+            <div class="row">
+                <form action="." method="post" enctype="multipart/form-data" onsubmit="myFunction()">
+                    <!-- <input type="text" name="text"> -->
+
+            </div>
+            <div class="row">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file" name="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s1">
+                    <input type="text" id="R0" name="R0">
+                    <label for="R0">R0</label>
+                    <span class="helper-text" data-error="wrong" data-sucess="right">Value must be between
+                        x0000-xFFFF</span>
+                </div>
+                <div class="input-field col s1">
+                    <input type="text" id="R1" name="R1">
+                    <label for="R1">R1</label>
+                </div>
+                <div class="input-field col s1">
+                    <input type="text" id="R2" name="R2">
+                    <label for="R2">R2</label>
+                </div>
+                <div class="input-field col s1">
+                    <input type="text" id="R3" name="R3">
+                    <label for="R3">R3</label>
+                </div>
+                <div class="input-field col s6">
+                    <textarea id="textarea1" name="text"></textarea>
+                    <label for="textarea1">Comma Seperated List to add to the lc3 buffer : 11,12,1*ENTER*,11</label>
+                    <span class="helper-text" data-error="wrong" data-sucess="right">To the enter key use *ENTER*</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s1">
+                    <input type="text" id="R4" name="R4">
+                    <label for="R4">R4</label>
+                </div>
+                <div class="input-field col s1">
+                    <input type="text" id="R5" name="R5">
+                    <label for="R5">R5</label>
+                </div>
+                <div class="input-field col s1">
+                    <input type="text" id="R6" name="R6">
+                    <label for="R6">R6</label>
+                </div>
+                <div class="input-field col s1">
+                    <input type="text" id="R7" name="R7">
+                    <label for="R7">R7</label>
+                </div>
+                <div class="input-field col s6">
+                    <textarea id="textarea2" name="ta_regex"></textarea>
+                    <label for="textarea2">Regex</label>
+                    <span class="helper-text" data-error="wrong" data-sucess="right">Enter regex to match.</span>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <input type="submit" value="Grade">
+            </div>
+
+            </form>
+
+            <script>
+                function myFunction() {
+                    // alert("If you are downloading over 50 files then it might take two tries if you get redirected to cloudflare saying you timed out reload paste the link in again and hit enter again.");
+                }
+            </script>
+            {% if output != '' %}
+            <!-- Create text window with output -->
+            <!-- <textarea rows=5 cols="60" name="output" disabled="True">{{output}}</textarea> -->
+            {% for tests in output %}
+                {% for line in output[tests] %}
+                 {{line}} <br>
+                {% endfor %}
+            {% endfor %}
+            {% endif %}
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                <li onload="M.toast({html: '{{message}}'})"></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            {% block body %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
+                        content.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2014 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+    <script onload="  M.AutoInit();" type="text/javascript"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  lc3:
+    build: ./LC3G/.
+    restart: always
+    command: python main.py
+    volumes:
+      - ./LC3G/code:/code
+    ports:
+      - "12345:12345"
+    # healthcheck:
+    #   test: ["CMD", "curl", "http://localhost:12345"]
